@@ -101,5 +101,69 @@ flutter-docker/
 │   ├── 01_web_cv.png
 │   ├── 02_flutter_claro.png
 │   └── 03_flutter_oscuro.png
-│
 └── README.md
+```
+---
+
+## 6. Evidencias
+
+### Hoja de Vida en navegador
+
+![Hoja de Vida Web](./capturas_cv/01_web_cv.png)
+
+### Aplicación Flutter - Tema claro
+
+![Flutter Tema Claro](./capturas_cv/02_flutter_claro.png)
+
+### Aplicación Flutter - Tema oscuro
+
+![Flutter Tema Oscuro](./capturas_cv/03_flutter_oscuro.png)
+
+---
+
+## 7. Comparación entre desarrollo nativo y enfoque embebido
+
+| Aspecto | Desarrollo nativo Android | Web embebida en Flutter |
+|---|---|---|
+| Interfaz | Utiliza componentes propios de Android | Utiliza HTML, CSS y JavaScript dentro de WebView |
+| Rendimiento | Integración más directa con el sistema | Incluye una capa adicional de renderizado web |
+| Reutilización | Orientado principalmente a Android | El contenido web puede reutilizarse en distintas plataformas |
+| Mantenimiento | Los cambios se realizan directamente en la aplicación | La interfaz puede modificarse desde HTML, CSS y JavaScript |
+| Experiencia de usuario | Mayor integración con componentes nativos | Combina contenido web con controles Flutter |
+| Funcionamiento offline | Puede trabajar localmente | Puede funcionar offline utilizando assets locales |
+| Multiplataforma | Requiere adaptaciones según la plataforma | Facilita la reutilización del contenido web |
+---
+
+## 8. Análisis comparativo
+
+El desarrollo nativo en Android ofrece una integración directa con los componentes y recursos del sistema operativo, lo que puede proporcionar una experiencia de usuario más cercana al entorno del dispositivo y un mayor control sobre el rendimiento.
+
+Por otro lado, el enfoque híbrido implementado en esta práctica permite reutilizar una interfaz desarrollada con HTML5, CSS3 y JavaScript dentro de una aplicación Flutter mediante WebView. Esto facilita el mantenimiento de la interfaz y permite reutilizar el mismo contenido web en distintos entornos.
+
+La solución embebida también permite combinar el contenido web con controles nativos de Flutter, como el botón para recargar la página y el cambio entre tema claro y oscuro.
+
+En cuanto a mantenibilidad, el enfoque híbrido resulta conveniente porque gran parte de los cambios visuales pueden realizarse directamente sobre los archivos HTML, CSS y JavaScript, mientras que el desarrollo nativo requiere modificar directamente la interfaz de la aplicación.
+
+En términos de rendimiento, el desarrollo nativo tiene una integración más directa con el sistema, mientras que el enfoque embebido utiliza una capa adicional de renderizado mediante WebView.
+
+---
+
+## 9. Conclusiones
+
+1. La transformación de la hoja de vida a un formato web responsivo permitió adaptar correctamente el contenido a diferentes tamaños de pantalla mediante HTML5 y CSS3, cumpliendo con el enfoque Mobile-First planteado en la práctica.
+
+2. La integración de la página web dentro de Flutter mediante WebView permitió reutilizar el contenido web dentro de una aplicación móvil y combinarlo con controles nativos como el cambio de tema claro/oscuro y la recarga de la página.
+
+3. En comparación con una aplicación nativa, la solución embebida facilita la reutilización y el mantenimiento del código, ya que gran parte de los cambios visuales pueden realizarse directamente sobre HTML, CSS y JavaScript.
+
+4. El desarrollo nativo ofrece una integración más directa con el sistema operativo, mientras que el enfoque híbrido utiliza una capa adicional de renderizado mediante WebView, lo que puede influir en el rendimiento, aunque aporta mayor flexibilidad para reutilizar la interfaz en distintas plataformas.
+
+---
+
+## 10. Bibliografía
+
+- Flutter. (2025). *Flutter documentation*. Google. https://docs.flutter.dev
+- Flutter Team. (2025). *webview_flutter* [Paquete de Dart]. https://pub.dev/packages/webview_flutter
+- Marcotte, E. (2011). *Responsive Web Design*. A Book Apart.
+- Mozilla. (2025). *MDN Web Docs: HTML, CSS y JavaScript*. https://developer.mozilla.org/es/
+- Windmill, E. (2020). *Flutter in Action*. Manning Publications.
