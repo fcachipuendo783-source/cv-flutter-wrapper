@@ -1,0 +1,25 @@
+# Nombre del paquete Dart del servidor.
+# Los import del manual usan servidor_oauth, por eso conservamos este nombre.
+name: servidor_oauth
+
+# Describe las dos responsabilidades: autorización OAuth y API protegida.
+description: Servidor OAuth 2.0 (Authorization Code + PKCE) que emite JWT, y API protegida.
+
+# Versión inicial del proyecto.
+version: 1.0.0
+
+# Evita que este proyecto se publique accidentalmente en pub.dev.
+publish_to: none
+
+# Define las versiones del SDK de Dart compatibles con el proyecto.
+environment:
+  # Acepta Dart desde 3.8.0 hasta antes de 4.0.0.
+  # Tu versión 3.12.0 se encuentra dentro de este rango.
+  sdk: ^3.8.0
+dependencies:
+  crypto: ^3.0.7
+  dart_jsonwebtoken: ^3.4.1
+  shelf: ^1.4.2
+  shelf_router: ^1.1.4
+dev_dependencies:
+  test: ^1.33.0

@@ -1,0 +1,7 @@
+# Excluye los archivos locales generados por las herramientas de Dart.
+# La imagen generará su propia configuración al ejecutar dart pub get.
+.dart_tool/
+
+# Excluye resultados de compilaciones locales.
+# El Dockerfile compilará el servidor dentro de su propia etapa build.
+build/

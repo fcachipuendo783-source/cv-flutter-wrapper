@@ -1,0 +1,6 @@
+# Evita incluir el secreto local en Git.
+.env
+
+# Excluye archivos generados por Dart y Flutter.
+**/.dart_tool/
+**/build/

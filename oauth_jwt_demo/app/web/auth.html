@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<!-- Título de la ventana que recibe la redirección OAuth. -->
+<title>Autenticación completa</title>
+
+<!-- Mensaje visible si el navegador no cierra la ventana automáticamente. -->
+<p>Autenticación completa. Si esta ventana no se cierra sola, ciérrala.</p>
+
+<script>
+  /**
+   * Comunica la URL de retorno a flutter_web_auth_2.
+   * Esa URL contiene los parámetros OAuth, como code y state,
+   * o un error si el servidor rechazó la autorización.
+   */
+  function enviarResultado() {
+    // La clave debe coincidir con la que reconoce el paquete.
+    // location.href incluye la URL completa y sus parámetros.
+    const mensaje = { 'flutter-web-auth-2': window.location.href };
+
+    // Caso habitual: el login se abrió en una ventana emergente.
+    if (window.opener) {
+      // Entrega el resultado a la ventana que abrió el login.
+      // Restringe el destinatario al mismo origen de esta página.
+      window.opener.postMessage(mensaje, window.location.origin);
+
+      // Solicita cerrar la ventana después de enviar el resultado.
+      window.close();
+
+    // Contempla el caso de que esta página esté dentro de otra ventana,
+    // por ejemplo, dentro de un marco.
+    } else if (window.parent && window.parent !== window) {
+      // Envía el resultado a la ventana contenedora del mismo origen.
+      window.parent.postMessage(mensaje, window.location.origin);
+
+    // Si no hay una ventana de apertura ni un marco contenedor,
+    // utiliza el almacenamiento local como alternativa del manual.
+    } else {
+      // Guarda la URL bajo la clave que reconoce el paquete.
+      localStorage.setItem('flutter-web-auth-2', window.location.href);
+
+      // Solicita cerrar la ventana una vez almacenado el resultado.
+      window.close();
+    }
+  }
+
+  // Procesa el retorno en cuanto el navegador ejecuta este script.
+  enviarResultado();
+</script>

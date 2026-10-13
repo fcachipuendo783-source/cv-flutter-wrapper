@@ -1,0 +1,55 @@
+# Define los servicios que Docker Compose administrará para esta práctica.
+services:
+  # Servidor Dart: gestiona el login, emite tokens y ofrece la API protegida.
+  auth-server:
+    # Construye la imagen usando el Dockerfile de la carpeta servidor.
+    build: ./servidor
+
+    # Nombre que usaremos para identificar el contenedor y consultar sus logs.
+    container_name: llave-segura-auth
+
+    # Conecta el puerto 9000 de tu computadora con el 8080 del contenedor.
+    ports:
+      - "9000:8080"
+
+    # Variables que leerá la configuración del servidor Dart.
+    environment:
+      # Identifica al emisor de los JWT; se utilizará en el claim iss.
+      ISSUER: "http://localhost:9000"
+
+      # Valor de ejemplo del manual para firmar los JWT con HS256.
+      # Antes de entregar el repositorio, lo configuraremos mediante .env
+      # para cumplir el requisito de no guardar secretos en Git.
+      JWT_SECRET: "cambia-este-secreto-por-uno-largo-y-aleatorio"
+
+      # Limita el access token a 60 segundos para observar su expiración.
+      ACCESS_TTL_SECONDS: "60"
+
+    # Reinicia el servicio automáticamente, excepto si lo detienes manualmente.
+    restart: unless-stopped
+
+  # Servidor nginx: entrega al navegador la aplicación Flutter compilada.
+  web:
+    # Utiliza la imagen ligera de nginx basada en Alpine Linux.
+    image: nginx:alpine
+
+    # Nombre del contenedor que publicará la aplicación web.
+    container_name: llave-segura-web
+
+    # Permite acceder desde tu computadora mediante localhost:8082.
+    # nginx escucha en el puerto 80 dentro del contenedor.
+    ports:
+      - "8082:80"
+
+    # Comparte la compilación web de Flutter con la carpeta pública de nginx.
+    # :ro permite que nginx lea los archivos sin modificarlos.
+    volumes:
+      - ./app/build/web:/usr/share/nginx/html:ro
+
+    # Indica que Compose debe iniciar auth-server antes que web.
+    # No comprueba que el servidor ya esté listo para recibir peticiones.
+    depends_on:
+      - auth-server
+
+    # Mantiene la misma política de reinicio que el servidor OAuth.
+    restart: unless-stopped
